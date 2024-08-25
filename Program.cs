@@ -21,7 +21,8 @@ builder.Services.AddScoped<ITasksRepository, TasksRepository>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
 // Registrar los servicios
-builder.Services.AddScoped<ExcelExportService>();
+builder.Services.AddScoped<ExcelService>();
+builder.Services.AddScoped<CSVService>();
 
 var app = builder.Build();
 

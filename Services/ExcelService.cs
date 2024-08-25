@@ -3,7 +3,7 @@ using Task = TodoAPI.Models.Task;
 
 namespace TodoAPI.Services;
 
-public class ExcelExportService
+public class ExcelService
 {
     public Stream ExportTasksToExcel(IEnumerable<Task> tasks)
     {
