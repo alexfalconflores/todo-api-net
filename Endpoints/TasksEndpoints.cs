@@ -1,4 +1,5 @@
 ﻿using TodoAPI.Repositories;
+using TodoAPI.Services;
 using Task = TodoAPI.Models.Task;
 
 namespace TodoAPI.Endpoints;
@@ -31,6 +32,14 @@ public static class TasksEndpoints
             return Results.Ok(task);
         })
         .WithName("GetTaskById");
+
+        group.MapGet("/export/{userId:int}", async (int userId, ITasksRepository repository, ExcelExportService excel) =>
+        {
+            var tasks = await repository.GetTasksByUserId(userId, null, null);
+            var excelStream = excel.ExportTasksToExcel(tasks);
+            return Results.File(excelStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Tasks.xlsx");
+        })
+        .WithName("ExportTasksToExcel");
 
         group.MapPost("/", async (Task task, ITasksRepository repository) =>
         {

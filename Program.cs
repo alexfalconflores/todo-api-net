@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TodoAPI.Data;
 using TodoAPI.Endpoints;
 using TodoAPI.Repositories;
+using TodoAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,9 @@ builder.Services.AddDbContext<TodoAppContext>(options =>
 // Registrar los repositorios
 builder.Services.AddScoped<ITasksRepository, TasksRepository>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+
+// Registrar los servicios
+builder.Services.AddScoped<ExcelExportService>();
 
 var app = builder.Build();
 
